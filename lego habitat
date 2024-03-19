@@ -1,0 +1,87 @@
+#include <kipr/wombat.h>
+int lwheel_port = 3;
+int rwheel_port = 1;
+
+int main()
+{
+// 0-15s Habitats on ground to 2 lowest posts
+    
+    
+// 15-60s Habitats (5x) on 15" to all middle posts
+    
+    
+// 60-75s Small surface stations to zones 3, 5 and rock heap
+    
+    
+// 75-120s Habitats (7x) on 20" to all tall posts
+    
+    
+}
+
+
+//Functions
+void left_turn()
+{
+    cmpc(rwheel_port);
+    while(gmpc(rwheel_port)<1250)
+    {
+        mav(lwheel_port,-500);
+        mav(rwheel_port,500);
+    }
+}
+void right_turn()
+{
+    cmpc(lwheel_port);
+    while(gmpc(lwheel_port)<1250)
+    {
+        mav(lwheel_port,500);
+        mav(rwheel_port,-500);
+    }
+}
+void half_turn()
+{
+    cmpc(rwheel_port);
+    while(gmpc(rwheel_port)<2480)
+    {
+        mav(lwheel_port,-500);
+        mav(rwheel_port,500);
+    }
+}
+void habitat_1(int distance,int storage,int habitat)
+{
+    //claw open
+    //lower claw (distance)
+    //claw close
+    //raise claw
+    if (storage = 1)
+    {
+    //raise claw ___ amt
+    }
+    if (storage = 2)
+    {
+    //raise claw ___ amt
+    }
+    if (storage = 3)
+    {
+    //raise claw ___ amt
+    }
+    //move claw (short_h/medium_h/tall_h)
+    if (habitat = 1)
+    {
+    //raise claw ___ amt
+    }
+    if (habitat = 2)
+    {
+    //raise claw ___ amt
+    }
+    if (habitat = 3)
+    {
+    //raise claw ___ amt
+    }
+}
+void habitat_2()
+{
+    //lower claw - habitat onto pvc
+    //claw open
+    //lego backup        
+}
