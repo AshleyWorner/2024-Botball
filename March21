@@ -1,0 +1,79 @@
+#include <kipr/wombat.h>
+int lwheel_port = 1;
+int rwheel_port = 3;
+int claw_open = 1024;
+int claw_close = 1400;
+
+int main()
+{
+    enable_servos();
+    cmpc(0);
+    open_claw();
+    lift_up(4000);
+    lift_stop();
+    close_claw();
+    lift_up(7200);
+    lift_stop();
+    mav(1,-500);
+    mav(3,-500);
+    msleep(3000);
+    uturn();
+  //  msleep(2000);
+    lift_up(7000);
+    mav(1,500);
+    mav(3,500);
+    msleep(2000);
+    open_claw();
+    disable_servos();
+}
+void drive_forward(int distance3)
+{
+    cmpc(rwheel_port);
+    while(gmpc(rwheel_port)<distance3)
+    {
+        mav(lwheel_port,500);
+        mav(rwheel_port,500);
+        msleep(10);
+    }
+}
+void uturn()
+{
+    cmpc(rwheel_port);
+    while(gmpc(rwheel_port)<1300) //2480
+    {
+        mav(lwheel_port,500);
+        mav(rwheel_port,-500);
+        msleep(10);
+    }
+}
+void lift_up(int distance)
+{
+    while(gmpc(0)<distance)
+    {
+        mav(0,500);
+        msleep(10);
+    }
+}
+void lift_down(int distance2)
+{
+    while(gmpc(0)>distance2)
+    {
+        mav(0,-500);
+        msleep(10);
+    }
+}
+void lift_stop()
+{
+    mav(0,0);
+    msleep(1000);
+}
+void open_claw()
+{
+    set_servo_position(0,claw_open);
+    msleep(1000);
+}
+void close_claw()
+{
+    set_servo_position(0,claw_close);
+    msleep(1000);
+}
